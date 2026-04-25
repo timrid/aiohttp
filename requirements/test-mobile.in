@@ -1,0 +1,11 @@
+-r base-ft.in
+-r test-common-base.in
+
+# pip-compile does not support environment markers for transitive dependencies. So
+# some of them have to be explicitly excluded here.
+
+# pycares is a transitive dependency of aiodns, that is currently not supported on Android and iOS.
+pycares; sys_platform != 'android' and sys_platform != 'ios'
+
+# cffi is a transitive dependency of pycares.
+cffi; sys_platform != 'android' and sys_platform != 'ios'
