@@ -626,9 +626,6 @@ async def test_static_file_ssl(
     await conn.close()
 
 
-@pytest.mark.skipif(
-    sys.platform in ("android", "ios"), reason="README.md not supported"
-)
 async def test_static_file_directory_traversal_attack(
     aiohttp_client: AiohttpClient,
 ) -> None:
