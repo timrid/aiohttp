@@ -349,9 +349,14 @@ jobs:
       # There have been issues to install the Android emulator. Probably this is due to the
       # disk being full. To hopefully work around this, we free up some disk space. See also
       # https://github.com/pybind/pybind11/pull/5914#issuecomment-3607856613
+      #
+      # Note: $ANDROID_HOME/ndk is intentionally NOT removed. NDK 27.3.13750724 is
+      # pre-installed on ubuntu-latest and is the exact version required by CPython's
+      # android.py. Removing it causes sdkmanager to re-download it, which fails
+      # intermittently with "Error on ZipFile unknown archive".
       run: |
         df -m
-        sudo rm -rf $ANDROID_HOME/ndk /opt/hostedtoolcache/CodeQL \
+        sudo rm -rf /opt/hostedtoolcache/CodeQL \
           /usr/local/lib/node_modules /usr/local/share/chromium \
           /usr/local/share/powershell
         df -m
